@@ -7,6 +7,7 @@ const passport = require('passport')
 
 var indexRouter = require('./routes/index');
 var usuariosRouter = require('./routes/usuarios');
+var funcionarioRouter = require('./routes/funcionario');
 var documentosRouter = require('./routes/documentos');
 
 require('dotenv').config()
@@ -23,5 +24,6 @@ require('./config/authStrategies')
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/documentos', documentosRouter);
+app.use('/funcionario', funcionarioRouter)
 
 module.exports = app;

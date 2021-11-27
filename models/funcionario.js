@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
   Funcionario.init({
     nome: DataTypes.STRING,
     senha: DataTypes.STRING,
-    matricula: DataTypes.STRING
+    matricula:{
+      type: DataTypes.STRING,
+      primaryKey: true
+    }
   }, {
     sequelize,
     modelName: 'Funcionario',

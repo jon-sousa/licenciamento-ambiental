@@ -1,6 +1,7 @@
 const {Usuario} = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const usuario = require('../models/usuario')
 
 function validarUsuario(usuario){
     if(!usuario){
@@ -10,7 +11,10 @@ function validarUsuario(usuario){
     if(!usuario.nome){
         return "O campo nome nao foi informado"
     }
-
+    
+    if(!usuario.senha){
+        return "O campo senha nao foi informado"
+    }
     
     if(!usuario.telefone){
         return "O campo telefone nao foi informado"
@@ -42,6 +46,21 @@ async function existeUsuarioCadastrado(cpf){
     })
     console.log(usuario)
     return usuario
+}
+
+function alteraUsuario(usuarioOriginal, usuarioAlterado){
+    if(usuarioAlterado.nome){
+        usuarioOriginal.nome = usuarioAlterado.nome
+    }
+    
+    if(usuarioAlterado.endereco){
+        usuarioOriginal.endereco = usuarioAlterado.endereco
+    }
+    
+    if(usuarioAlterado.telefone){
+        usuarioOriginal.telefone = usuarioAlterado.telefone
+    }
+    
 }
 
 module.exports = {
@@ -90,5 +109,22 @@ module.exports = {
             return res.status(500).json({Error: `Aconteceu um erro: ${e}`})
         }
 
+    },
+
+    async alterarUsuario(req, res){
+        try{
+            let usuario = req.user
+
+            if(!usuario){
+                return res.status(404).json({error: 'usuario nao encontrado'})
+            }
+
+            alteraUsuario(usuario, req.body)  
+            await usuario.save()         
+            return res.status(200).json({result: "usuario alterado com sucesso"}) 
+        }
+        catch(error){
+            return res.status(500).json({error: error})
+        }
     }
 }
