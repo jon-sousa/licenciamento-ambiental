@@ -1,5 +1,6 @@
 const {Usuario} = require('../models')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 function validarUsuario(usuario){
     if(!usuario){
@@ -69,4 +70,25 @@ module.exports = {
             return res.status(500).json({Error: e})
         }
     },
+
+    async login(req, res){
+
+        try{
+            const {cpf} = req.user
+        
+            jwt.sign({cpf: cpf}, process.env.TOKEN_SECRET, (erro, token) => {
+                if(erro){
+                    return res.status(500).json({Error: `Erro ao gerar token ${erro}`})
+                }
+                
+                res.append('token', token)
+                res.status(204).send()
+            })
+            
+        }
+        catch(e){
+            return res.status(500).json({Error: `Aconteceu um erro: ${e}`})
+        }
+
+    }
 }
