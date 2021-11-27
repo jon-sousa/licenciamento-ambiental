@@ -22,7 +22,7 @@ module.exports = {
       funcionarioId: {
         type: Sequelize.STRING,
         references: {model: 'Funcionarios', key: 'matricula'},
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

@@ -6,9 +6,10 @@ const passport = require('passport')
 
 
 var indexRouter = require('./routes/index');
-var usuariosRouter = require('./routes/usuarios');
+var usuarioRouter = require('./routes/usuarios');
 var funcionarioRouter = require('./routes/funcionario');
-var documentosRouter = require('./routes/documentos');
+var documentoRouter = require('./routes/documentos');
+var solicitacaoRouter = require('./routes/solicitacao');
 
 require('dotenv').config()
 var app = express();
@@ -22,8 +23,9 @@ app.use(passport.initialize())
 require('./config/authStrategies')
 
 app.use('/', indexRouter);
-app.use('/usuarios', usuariosRouter);
-app.use('/documentos', documentosRouter);
+app.use('/usuarios', usuarioRouter);
+app.use('/documentos', documentoRouter);
 app.use('/funcionario', funcionarioRouter)
+app.use('/solicitacao', solicitacaoRouter)
 
 module.exports = app;
