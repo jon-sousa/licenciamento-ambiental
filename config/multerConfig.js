@@ -8,7 +8,7 @@ module.exports = multer.diskStorage({
     },
 
     filename: function(req, file, cb){
-        let salt = crypto.randomBytes(120).toString('base64')
+        let salt = crypto.randomBytes(64).toString('base64')
         cb(null, file.fieldname + salt)
     }
 })
