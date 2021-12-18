@@ -100,7 +100,8 @@ module.exports = {
                     return res.status(500).json({Error: `Erro ao gerar token ${erro}`})
                 }
                 
-                res.append('token', token)
+                res.append('Authorization', token)
+				res.append("Access-Control-Expose-Headers", "*")
                 res.status(204).send()
             })
             
