@@ -5,5 +5,6 @@ const upload = require('multer')({storage: multerConfig})
 const solicitacaoController = require('../controllers/solicitacaoController')
 
 router.post('/cadastrar-solicitacao', passport.authenticate('bearer-usuario', {session: false}), upload.single('file'), solicitacaoController.cadastrarSolicitacao)
+router.get('/consultar-solicitacoes-por-usuario', passport.authenticate('bearer-usuario', {session: false}), solicitacaoController.consultaSolicitacoesPorUsuario)
 
 module.exports = router

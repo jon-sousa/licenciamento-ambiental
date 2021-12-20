@@ -11,10 +11,18 @@ module.exports = (sequelize, DataTypes) => {
       })
       
       Solicitacao.hasMany(models.Estado, {
-        foreignKey: 'solicitacaoId'
+        foreignKey: 'solicitacaoId',
+        as: 'estados'
       })
 
-      Solicitacao.belongsTo(models.Usuario)
+      Solicitacao.belongsTo(models.Estado, {
+        foreignKey: 'ultimoEstado', 
+        as: 'estadoAtual'
+      })
+
+      Solicitacao.belongsTo(models.Usuario, {
+        foreignKey: 'usuarioId'
+      })
     }
   };
   Solicitacao.init({
