@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Estado.belongsTo(models.Funcionario, {foreignKey: 'funcionarioId'})
 
-      Estado.hasOne(models.Solicitacao, {foreignKey: 'ultimoEstado'})
+      Estado.hasOne(models.Solicitacao, {foreignKey: 'ultimoEstado', as: 'estadoAtual'})
       Estado.belongsTo(models.Solicitacao, {foreignKey: 'solicitacaoId', as: 'estados'})
     }
   };

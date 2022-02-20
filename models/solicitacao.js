@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       
       Solicitacao.hasMany(models.Estado, {
         foreignKey: 'solicitacaoId',
-        as: 'estados'
+        as: 'estados',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       })
 
       Solicitacao.belongsTo(models.Estado, {

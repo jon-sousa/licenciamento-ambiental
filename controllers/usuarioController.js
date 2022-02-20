@@ -2,6 +2,7 @@ const {Usuario} = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const usuario = require('../models/usuario')
+const { consultaSolicitacoesPorUsuario } = require('./solicitacaoController')
 
 function validarUsuario(usuario){
     if(!usuario){
@@ -127,5 +128,18 @@ module.exports = {
         catch(error){
             return res.status(500).json({error: error})
         }
+    },
+
+    consultarUsuario(req, res){
+        let usuario = req.user
+        let usuarioResposta = {}
+
+        usuarioResposta.nome = usuario.nome
+        usuarioResposta.cpf = usuario.cpf
+        usuarioResposta.telefone = usuario.telefone
+        usuarioResposta.endereco = usuario.endereco
+
+        return res.status(200).json(usuarioResposta)
     }
+
 }
