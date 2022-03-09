@@ -1,2 +1,2 @@
 sequelize db:migrate
-web: node nodemon ./bin/www
+web: node ./bin/www
